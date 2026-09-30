@@ -8,6 +8,33 @@ Proje; TypeScript'i gerçek bir iş senaryosu üzerinde uygulamak amacıyla geli
 
 ---
 
+## İçindekiler
+
+- [Özellikler](#ozellikler)
+- [Kullanılan TypeScript Konuları](#kullanilan-typescript-konulari)
+- [Proje Yapısı](#proje-yapisi)
+- [Temel Modeller](#temel-modeller)
+  - [Vehicle](#vehicle)
+  - [Driver](#driver)
+  - [Fault](#fault)
+  - [MaintenanceRecord](#maintenance-record)
+- [Bakım Sistemi](#bakim-sistemi)
+- [Araç Arama Sistemi](#arac-arama-sistemi)
+- [Type Assertion Kullanımı](#type-assertion-kullanimi)
+- [Araç Sağlık Puanı](#arac-saglik-puani)
+- [Risk Sınıflandırması](#risk-siniflandirmasi)
+- [Göreve Uygunluk Kontrolü](#goreve-uygunluk-kontrolu)
+- [Genel Filo Raporu](#genel-filo-raporu)
+- [Test Verileri](#test-verileri)
+- [Örnek Sistem Çıktısı](#ornek-sistem-ciktisi)
+- [Kurulum ve Çalıştırma](#kurulum-ve-calistirma)
+- [Teknik Kazanımlar](#teknik-kazanimlar)
+- [Projenin Amacı](#projenin-amaci)
+
+---
+
+<a id="ozellikler"></a>
+
 ## Özellikler
 
 - Araç, sürücü, arıza ve bakım kayıtlarının modellenmesi
@@ -26,6 +53,8 @@ Proje; TypeScript'i gerçek bir iş senaryosu üzerinde uygulamak amacıyla geli
 - Gerçekçi mock veriler ve edge-case senaryoları ile sistem testi
 
 ---
+
+<a id="kullanilan-typescript-konulari"></a>
 
 ## Kullanılan TypeScript Konuları
 
@@ -46,6 +75,8 @@ Proje; TypeScript'i gerçek bir iş senaryosu üzerinde uygulamak amacıyla geli
 | Dependency Injection | Servislerin ihtiyaç duyduğu diğer servisleri constructor üzerinden almasında       |
 
 ---
+
+<a id="proje-yapisi"></a>
 
 ## Proje Yapısı
 
@@ -88,7 +119,11 @@ FleetGuard/
 
 ---
 
+<a id="temel-modeller"></a>
+
 ## Temel Modeller
+
+<a id="vehicle"></a>
 
 ### Vehicle
 
@@ -105,6 +140,8 @@ Araç bilgilerini ve araçla ilgili temel davranışları temsil eder. Başlıca
 - `vehicleType`
 
 Kilometre bilgisi doğrudan dışarıdan değiştirilemez. Değer private olarak tutulur ve yalnızca kontrollü yöntemlerle artırılır.
+
+<a id="driver"></a>
 
 ### Driver
 
@@ -133,6 +170,8 @@ TRUCK → C
 BUS   → D
 ```
 
+<a id="fault"></a>
+
 ### Fault
 
 Araç arızalarını temsil eder. Desteklenen arıza seviyeleri:
@@ -145,6 +184,8 @@ CRITICAL
 ```
 
 Çözülmemiş `CRITICAL` seviyesindeki bir arıza, aracın göreve çıkmasını engeller.
+
+<a id="maintenance-record"></a>
 
 ### MaintenanceRecord
 
@@ -159,6 +200,8 @@ Yapılan bakım işlemlerini saklar. Başlıca alanlar:
 Yeni bir bakım kaydı uygulandığında aracın `lastMaintenanceKm` değeri güncellenir.
 
 ---
+
+<a id="bakim-sistemi"></a>
 
 ## Bakım Sistemi
 
@@ -180,6 +223,8 @@ Ayrıca bakımın kaç kilometre geciktiği de hesaplanır.
 
 ---
 
+<a id="arac-arama-sistemi"></a>
+
 ## Araç Arama Sistemi
 
 `FleetService` üzerinden araçlar:
@@ -192,11 +237,15 @@ bilgilerine göre aranabilir. Plaka aramasında kullanıcı girişleri normalize
 
 ---
 
+<a id="type-assertion-kullanimi"></a>
+
 ## Type Assertion Kullanımı
 
 Projede dışarıdan gelmiş gibi kabul edilen araç verisi `unknown` olarak tanımlanır. Veri doğrudan `Vehicle` olarak kabul edilmez. Önce gerekli alanların bulunup bulunmadığı, alanların doğru veri tiplerinde olup olmadığı ve `status` ile `vehicleType` değerlerinin izin verilen değerlerden biri olup olmadığı kontrol edilir. Doğrulamadan sonra Type Assertion uygulanır ve gerçek bir `Vehicle` nesnesi oluşturulur.
 
 ---
+
+<a id="arac-saglik-puani"></a>
 
 ## Araç Sağlık Puanı
 
@@ -221,6 +270,8 @@ Sağlık puanı hiçbir zaman `0` değerinin altına düşmez.
 
 ---
 
+<a id="risk-siniflandirmasi"></a>
+
 ## Risk Sınıflandırması
 
 | Sağlık Puanı | Risk Seviyesi |
@@ -231,6 +282,8 @@ Sağlık puanı hiçbir zaman `0` değerinin altına düşmez.
 | 0–39         | `CRITICAL`    |
 
 ---
+
+<a id="goreve-uygunluk-kontrolu"></a>
 
 ## Göreve Uygunluk Kontrolü
 
@@ -266,6 +319,8 @@ ve görev reddinin tüm nedenleri `Reasons` altında gösterilir.
 
 ---
 
+<a id="genel-filo-raporu"></a>
+
 ## Genel Filo Raporu
 
 `ReportService`, filonun genel durumunu özetleyen bir rapor üretir. Örnek:
@@ -289,6 +344,8 @@ Maintenance Cost: 152,200 TL
 Toplam bakım maliyeti `reduce()` kullanılarak tüm bakım kayıtlarının maliyetlerinin toplanmasıyla hesaplanır.
 
 ---
+
+<a id="test-verileri"></a>
 
 ## Test Verileri
 
@@ -318,6 +375,8 @@ bulunur. Test verileri özellikle farklı edge-case senaryolarını kapsar:
 
 ---
 
+<a id="ornek-sistem-ciktisi"></a>
+
 ## Örnek Sistem Çıktısı
 
 ```text
@@ -346,6 +405,8 @@ MISSION READY: YES
 
 ---
 
+<a id="kurulum-ve-calistirma"></a>
+
 ## Kurulum ve Çalıştırma
 
 Projeyi klonladıktan sonra proje klasörüne geç:
@@ -367,6 +428,8 @@ node dist/index.js
 ```
 
 ---
+
+<a id="teknik-kazanimlar"></a>
 
 ## Teknik Kazanımlar
 
@@ -393,6 +456,8 @@ Bu proje ile aşağıdaki konular uygulamalı olarak pekiştirilmiştir:
 - Çoklu hata nedenlerinin yönetilmesi
 
 ---
+
+<a id="projenin-amaci"></a>
 
 ## Projenin Amacı
 
