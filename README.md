@@ -1,4 +1,4 @@
-# FleetGuard — Akıllı Araç Filo Bakım ve Arıza Yönetim Sistemi
+# 🚚 FleetGuard — Akıllı Araç Filo Bakım ve Arıza Yönetim Sistemi
 
 FleetGuard, bir araç filosundaki **araçların, sürücülerin, bakım kayıtlarının ve arızaların yönetimini** simüle eden TypeScript tabanlı bir konsol uygulamasıdır.
 
